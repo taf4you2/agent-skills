@@ -32,4 +32,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .ponytail/SKILL.md
           git diff-index --quiet HEAD || git commit -m "chore: aktualizacja reguł ponytail do najnowszej wersji"
+          git pull --rebase origin main
           git push
