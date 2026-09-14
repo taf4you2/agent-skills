@@ -1,0 +1,33 @@
+name: Update Ponytail Skill
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # Poniedziałek 3:00 UTC
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download ponytail AGENTS.md
+        run: |
+          mkdir -p .ponytail
+          curl -fsSL https://raw.githubusercontent.com/DietrichGebert/ponytail/main/AGENTS.md > /tmp/agents.md
+
+          # Konwertuj na format SKILL.md (frontmatter + content)
+          cat > .ponytail/SKILL.md << 'EOF'
+          ---
+          name: ponytail
+          description: Lazy senior developer mode - write minimal, reusable, correct code
+          ---
+
+          EOF
+          cat /tmp/agents.md >> .ponytail/SKILL.md
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .ponytail/SKILL.md
+          git commit -m "Update ponytail skill" || true
+          git push
