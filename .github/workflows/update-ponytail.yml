@@ -26,11 +26,16 @@ jobs:
           EOF
           cat /tmp/agents.md >> .ponytail/SKILL.md
 
+      - name: Sync do wspólnego folderu agentów (Claude Code, Codex)
+        run: |
+          mkdir -p .agents/skills/ponytail
+          cp .ponytail/SKILL.md .agents/skills/ponytail/SKILL.md
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .ponytail/SKILL.md
+          git add .ponytail/SKILL.md .agents/skills/ponytail/SKILL.md
           git diff-index --quiet HEAD || git commit -m "chore: aktualizacja reguł ponytail do najnowszej wersji"
           git pull --rebase origin main
           git push

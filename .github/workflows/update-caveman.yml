@@ -20,11 +20,16 @@ jobs:
           mkdir -p .caveman
           curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/skills/caveman/SKILL.md -o .caveman/SKILL.md
 
+      - name: Sync do wspólnego folderu agentów (Claude Code, Codex)
+        run: |
+          mkdir -p .agents/skills/caveman
+          cp .caveman/SKILL.md .agents/skills/caveman/SKILL.md
+
       - name: Automatyczny commit zmian
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .caveman/SKILL.md
+          git add .caveman/SKILL.md .agents/skills/caveman/SKILL.md
           # Commituje tylko wtedy, gdy plik na GitHubie autora rzeczywiście się zmienił
           git diff-index --quiet HEAD || git commit -m "chore: aktualizacja reguł caveman do najnowszej wersji"
           git pull --rebase origin main
