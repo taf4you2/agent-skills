@@ -4,6 +4,9 @@ on:
     - cron: '0 3 * * 1'  # Poniedziałek 3:00 UTC
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -14,7 +17,6 @@ jobs:
           mkdir -p .ponytail
           curl -fsSL https://raw.githubusercontent.com/DietrichGebert/ponytail/main/AGENTS.md > /tmp/agents.md
 
-          # Konwertuj na format SKILL.md (frontmatter + content)
           cat > .ponytail/SKILL.md << 'EOF'
           ---
           name: ponytail
@@ -29,5 +31,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .ponytail/SKILL.md
-          git commit -m "Update ponytail skill" || true
+          git diff-index --quiet HEAD || git commit -m "chore: aktualizacja reguł ponytail do najnowszej wersji"
           git push

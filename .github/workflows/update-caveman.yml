@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * 1' # Uruchamia proces automatycznie w każdy poniedziałek o 00:00
   workflow_dispatch: # Pozwala na ręczne kliknięcie "Run workflow" w zakładce Actions
 
+permissions:
+  contents: write
+
 jobs:
   update-rules:
     runs-on: ubuntu-latest
