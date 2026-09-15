@@ -19,36 +19,36 @@ jobs:
     steps:
       - name: Uruchom update-caveman na development (00:00 UTC)
         if: github.event.schedule == '0 0 * * 1' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run update-caveman.yml --ref development
+        run: gh workflow run update-caveman.yml --ref development --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Uruchom update-ponytail na development (03:00 UTC)
         if: github.event.schedule == '0 3 * * 1' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run update-ponytail.yml --ref development
+        run: gh workflow run update-ponytail.yml --ref development --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Uruchom update-systematic-debugging na development (06:00 UTC)
         if: github.event.schedule == '0 6 * * 1' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run update-systematic-debugging.yml --ref development
+        run: gh workflow run update-systematic-debugging.yml --ref development --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Uruchom update-verification-before-completion na development (09:00 UTC)
         if: github.event.schedule == '0 9 * * 1' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run update-verification-before-completion.yml --ref development
+        run: gh workflow run update-verification-before-completion.yml --ref development --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Uruchom update-source-driven-development na development (12:00 UTC)
         if: github.event.schedule == '0 12 * * 1' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run update-source-driven-development.yml --ref development
+        run: gh workflow run update-source-driven-development.yml --ref development --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
 
       - name: Uruchom update-code-review na development (15:00 UTC)
         if: github.event.schedule == '0 15 * * 1' || github.event_name == 'workflow_dispatch'
-        run: gh workflow run update-code-review.yml --ref development
+        run: gh workflow run update-code-review.yml --ref development --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
