@@ -13,9 +13,11 @@ To repozytorium **nie definiuje skilli od zera** — zbiera i porządkuje najlep
 
 | Narzędzie | Skąd czyta skille |
 |-----------|--------------------|
-| **Claude Code** | `.agents/skills/<nazwa>/SKILL.md` (lub `.caveman/`, `.ponytail/` — legacy ścieżki) |
+| **Claude Code** | `.claude/skills/<nazwa>/SKILL.md` (projekt) lub `~/.claude/skills/<nazwa>/SKILL.md` (globalnie) — **nie** `.agents/skills/`, patrz sekcja niżej |
 | **Codex** | `.agents/skills/<nazwa>/SKILL.md` |
 | **Antigravity** | `AGENTS.md` w rootcie (index) i zagnieżdżone `AGENTS.md`/`SKILL.md` w `.agents/skills/` |
+
+> **Uwaga (Claude Code):** to repo trzyma pliki skilli pod `.agents/skills/` (dla Codex/Antigravity) oraz pod legacy ścieżkami `.caveman/`, `.ponytail/`. Claude Code nie skanuje żadnej z tych lokalizacji automatycznie — żeby skill był widoczny, jego `SKILL.md` musi fizycznie leżeć (lub być zlinkowany) pod `.claude/skills/<nazwa>/SKILL.md`. Zobacz [„Submodule + Claude Code”](#submodule--claude-code) niżej.
 
 ## Dostępne skille w tym repo
 
