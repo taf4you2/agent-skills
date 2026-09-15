@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '0 0 * * 1' # caveman, poniedziałek 00:00 UTC
     - cron: '0 3 * * 1' # ponytail, poniedziałek 03:00 UTC
+    - cron: '0 6 * * 1' # systematic-debugging, poniedziałek 06:00 UTC
+    - cron: '0 9 * * 1' # verification-before-completion, poniedziałek 09:00 UTC
+    - cron: '0 12 * * 1' # source-driven-development, poniedziałek 12:00 UTC
+    - cron: '0 15 * * 1' # code-review, poniedziałek 15:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -22,5 +26,29 @@ jobs:
       - name: Uruchom update-ponytail na development (03:00 UTC)
         if: github.event.schedule == '0 3 * * 1' || github.event_name == 'workflow_dispatch'
         run: gh workflow run update-ponytail.yml --ref development
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Uruchom update-systematic-debugging na development (06:00 UTC)
+        if: github.event.schedule == '0 6 * * 1' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run update-systematic-debugging.yml --ref development
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Uruchom update-verification-before-completion na development (09:00 UTC)
+        if: github.event.schedule == '0 9 * * 1' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run update-verification-before-completion.yml --ref development
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Uruchom update-source-driven-development na development (12:00 UTC)
+        if: github.event.schedule == '0 12 * * 1' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run update-source-driven-development.yml --ref development
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Uruchom update-code-review na development (15:00 UTC)
+        if: github.event.schedule == '0 15 * * 1' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run update-code-review.yml --ref development
         env:
           GH_TOKEN: ${{ github.token }}
