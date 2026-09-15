@@ -1,8 +1,6 @@
 name: Update Ponytail Skill
 on:
-  schedule:
-    - cron: '0 3 * * 1'  # Poniedziałek 3:00 UTC
-  workflow_dispatch:
+  workflow_dispatch: # Odpalane co tydzień przez dispatcher z main (.github/workflows/trigger-sync.yml) lub ręcznie
 
 permissions:
   contents: write
@@ -12,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Download ponytail AGENTS.md
         run: |
           mkdir -p .ponytail

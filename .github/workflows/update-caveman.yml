@@ -1,9 +1,7 @@
 name: Auto Update Caveman Rules
 
 on:
-  schedule:
-    - cron: '0 0 * * 1' # Uruchamia proces automatycznie w każdy poniedziałek o 00:00
-  workflow_dispatch: # Pozwala na ręczne kliknięcie "Run workflow" w zakładce Actions
+  workflow_dispatch: # Odpalane co tydzień przez dispatcher z main (.github/workflows/trigger-sync.yml) lub ręcznie
 
 permissions:
   contents: write
@@ -12,8 +10,10 @@ jobs:
   update-rules:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout kodu
+      - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Pobranie najnowszych reguł SKILL.md
         run: |
