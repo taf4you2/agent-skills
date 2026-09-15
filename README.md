@@ -1,6 +1,6 @@
 # agent-skills
 
-Kurator i agregator skilli dla agentów kodujących (Claude Code, Codex, Antigravity) — jedno miejsce, w którym trzymasz listę przydatnych skilli, ich zalecane zestawy dla różnych typów projektów oraz automatyczną synchronizację z ich źródłowymi repozytoriami.
+Zbiór skilli dla agentów kodujących (Claude Code, Codex, Antigravity) — jedno miejsce, w którym trzymasz listę przydatnych skilli, ich zalecane zestawy dla różnych typów projektów oraz automatyczną synchronizację z ich źródłowymi repozytoriami.
 
 ## Co to jest
 
