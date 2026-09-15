@@ -27,6 +27,10 @@ Te skille są już zsynchronizowane i gotowe do użycia (aktualizowane automatyc
 |-------|------|---------|
 | **caveman** | Tryb ultra-skompresowanej komunikacji — mniej tokenów, ta sama precyzja techniczna | [`.agents/skills/caveman/SKILL.md`](./.agents/skills/caveman/SKILL.md) |
 | **ponytail** | Tryb "leniwego seniora" — YAGNI, minimalny kod, reużywanie zamiast pisania od nowa | [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md) |
+| **systematic-debugging** | Ustalanie przyczyny źródłowej błędów przed poprawką | [`.agents/skills/systematic-debugging/SKILL.md`](./.agents/skills/systematic-debugging/SKILL.md) |
+| **verification-before-completion** | Uruchamianie testów i kontroli przed uznaniem zadania za zakończone | [`.agents/skills/verification-before-completion/SKILL.md`](./.agents/skills/verification-before-completion/SKILL.md) |
+| **source-driven-development** | Sprawdzanie bibliotek i API w dokumentacji źródłowej zamiast zgadywania | [`.agents/skills/source-driven-development/SKILL.md`](./.agents/skills/source-driven-development/SKILL.md) |
+| **code-review** | Sprawdzanie zmian pod kątem standardów projektu i specyfikacji | [`.agents/skills/code-review/SKILL.md`](./.agents/skills/code-review/SKILL.md) |
 
 Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md). Pozostałe skille z [`skillList.md`](./skillList.md) są na razie tylko referencjami do zewnętrznych repozytoriów (nie są jeszcze zsynchronizowane lokalnie).
 

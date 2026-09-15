@@ -1,0 +1,37 @@
+name: Auto Update Code Review Rules
+
+on:
+  workflow_dispatch: # Odpalane co tydzień przez dispatcher z main (.github/workflows/trigger-sync.yml) lub ręcznie
+
+permissions:
+  contents: write
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pobranie najnowszych reguł SKILL.md
+        run: |
+          mkdir -p .code-review
+          curl -fsSL https://raw.githubusercontent.com/mattpocock/skills/main/skills/engineering/code-review/SKILL.md -o .code-review/SKILL.md
+
+      - name: Sync do wspólnego folderu agentów (Claude Code, Codex)
+        run: |
+          mkdir -p .agents/skills/code-review
+          cp .code-review/SKILL.md .agents/skills/code-review/SKILL.md
+
+      - name: Automatyczny commit zmian
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .code-review/SKILL.md .agents/skills/code-review/SKILL.md
+          # Commituje tylko wtedy, gdy plik na GitHubie autora rzeczywiście się zmienił
+          git diff-index --quiet HEAD || git commit -m "chore: aktualizacja reguł code-review do najnowszej wersji"
+          git pull --rebase origin main
+          git push
+</content>
