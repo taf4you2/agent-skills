@@ -1,0 +1,26 @@
+name: Trigger Skill Sync
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # caveman, poniedziałek 00:00 UTC
+    - cron: '0 3 * * 1' # ponytail, poniedziałek 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Uruchom update-caveman na development (00:00 UTC)
+        if: github.event.schedule == '0 0 * * 1' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run update-caveman.yml --ref development
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Uruchom update-ponytail na development (03:00 UTC)
+        if: github.event.schedule == '0 3 * * 1' || github.event_name == 'workflow_dispatch'
+        run: gh workflow run update-ponytail.yml --ref development
+        env:
+          GH_TOKEN: ${{ github.token }}
