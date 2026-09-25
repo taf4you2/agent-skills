@@ -1,6 +1,6 @@
 # agent-skills
 
-Zbiór skilli dla agentów kodujących (Claude Code, Codex, Antigravity) — jedno miejsce, w którym trzymasz listę przydatnych skilli, ich zalecane zestawy dla różnych typów projektów oraz automatyczną synchronizację z ich źródłowymi repozytoriami.
+Zbiór skilli dla agentów kodujących (Claude Code, Codex, Antigravity) oraz krótkich materiałów pomocniczych do pracy w repozytoriach — jedno miejsce, w którym trzymasz listę przydatnych skilli, ich zalecane zestawy dla różnych typów projektów, automatyczną synchronizację z ich źródłowymi repozytoriami i wspólne konwencje pracy.
 
 ## Co to jest
 
@@ -8,6 +8,7 @@ To repozytorium **nie definiuje skilli od zera** — zbiera i porządkuje najlep
 
 - **automatyczną synchronizację** wybranych skilli przez GitHub Actions, żeby zawsze mieć aktualną wersję ich `SKILL.md`
 - **wspólną strukturę folderów**, żeby te same skille działały w Claude Code, Codex i Antigravity bez ręcznego kopiowania
+- **materiały pomocnicze**, które ujednolicają codzienną pracę, np. zasady pisania wiadomości commitów
 
 ## Obsługiwane narzędzia
 
@@ -29,6 +30,12 @@ Te skille są już zsynchronizowane i gotowe do użycia (aktualizowane automatyc
 | **ponytail** | Tryb "leniwego seniora" — YAGNI, minimalny kod, reużywanie zamiast pisania od nowa | [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md) |
 
 Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md).
+
+## Materiały pomocnicze
+
+| Dokument | Opis |
+|----------|------|
+| [`.conventional-commits/conventional-commits.md`](./.conventional-commits/conventional-commits.md) | Praktyczna ściągawka po Conventional Commits: format wiadomości, typy commitów, breaking changes, stopki i przykłady |
 
 ## Jak sklonować do projektu
 
