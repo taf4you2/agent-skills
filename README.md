@@ -4,7 +4,7 @@ Zbiór skilli dla agentów kodujących (Claude Code, Codex, Antigravity) oraz kr
 
 ## Co to jest
 
-To repozytorium **nie definiuje skilli od zera** — zbiera i porządkuje najlepsze skille stworzone przez społeczność (Matt Pocock, Vercel Labs, Addy Osmani i inni), dodaje do nich:
+To repozytorium zbiera i porządkuje skille stworzone przez społeczność (Matt Pocock, Vercel Labs, Addy Osmani i inni) oraz zawiera własny skill `diff-review`. Dodaje do nich:
 
 - **automatyczną synchronizację** wybranych skilli przez GitHub Actions, żeby zawsze mieć aktualną wersję ich `SKILL.md`
 - **wspólną strukturę folderów**, żeby te same skille działały w Claude Code, Codex i Antigravity bez ręcznego kopiowania
@@ -22,14 +22,23 @@ To repozytorium **nie definiuje skilli od zera** — zbiera i porządkuje najlep
 
 ## Dostępne skille w tym repo
 
-Te skille są już zsynchronizowane i gotowe do użycia (aktualizowane automatycznie co tydzień):
+Poniższe skille są gotowe do użycia. `caveman` i `ponytail` są aktualizowane automatycznie co tydzień; `diff-review` jest utrzymywany lokalnie w tym repozytorium.
 
 | Skill | Opis | Ścieżka (wspólna) |
 |-------|------|---------|
 | **caveman** | Tryb ultra-skompresowanej komunikacji — mniej tokenów, ta sama precyzja techniczna | [`.agents/skills/caveman/SKILL.md`](./.agents/skills/caveman/SKILL.md) |
 | **ponytail** | Tryb "leniwego seniora" — YAGNI, minimalny kod, reużywanie zamiast pisania od nowa | [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md) |
+| **diff-review** | Porównanie niezacommitowanych zmian z `HEAD` oraz ocena błędów, ryzyk i przypadków brzegowych | [`.agents/skills/diff-review/SKILL.md`](./.agents/skills/diff-review/SKILL.md) |
 
 Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md).
+
+### Użycie `diff-review`
+
+Wpisz w rozmowie z agentem **„diff”** lub **„zrób diff”**. Reguła w [`AGENTS.md`](./AGENTS.md) kieruje agenta do skilla `diff-review`.
+
+Przegląd porównuje bieżące pliki z ostatnim commitem bieżącej gałęzi (`HEAD`), uwzględniając zmiany staged, unstaged oraz nowe nieśledzone pliki. Raport opisuje dodane, zmienione i usunięte elementy, wskazuje konkretne problemy i przypadki brzegowe oraz proponuje poprawki. Sam przegląd nie modyfikuje plików ani historii Git.
+
+Po skopiowaniu skilla do innego projektu dodaj do jego `AGENTS.md` regułę uruchamiania z sekcji „Polecenia własne” tego repozytorium.
 
 ## Materiały pomocnicze
 
