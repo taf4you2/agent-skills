@@ -4,7 +4,7 @@ Zbiór skilli dla agentów kodujących (Claude Code, Codex, Antigravity) oraz kr
 
 ## Co to jest
 
-To repozytorium zbiera i porządkuje skille stworzone przez społeczność (Matt Pocock, Vercel Labs, Addy Osmani i inni) oraz zawiera własny skill `diff-review`. Dodaje do nich:
+To repozytorium zbiera i porządkuje skille stworzone przez społeczność (Matt Pocock, Vercel Labs, Addy Osmani i inni) oraz zawiera własne skille `diff-review` i `conventionals`. Dodaje do nich:
 
 - **automatyczną synchronizację** wybranych skilli przez GitHub Actions, żeby zawsze mieć aktualną wersję ich `SKILL.md`
 - **wspólną strukturę folderów**, żeby te same skille działały w Claude Code, Codex i Antigravity bez ręcznego kopiowania
@@ -22,13 +22,14 @@ To repozytorium zbiera i porządkuje skille stworzone przez społeczność (Matt
 
 ## Dostępne skille w tym repo
 
-Poniższe skille są gotowe do użycia. `caveman` i `ponytail` są aktualizowane automatycznie co tydzień; `diff-review` jest utrzymywany lokalnie w tym repozytorium.
+Poniższe skille są gotowe do użycia. `caveman` i `ponytail` są aktualizowane automatycznie co tydzień; `diff-review` i `conventionals` są utrzymywane lokalnie w tym repozytorium.
 
 | Skill | Opis | Ścieżka (wspólna) |
 |-------|------|---------|
 | **caveman** | Tryb ultra-skompresowanej komunikacji — mniej tokenów, ta sama precyzja techniczna | [`.agents/skills/caveman/SKILL.md`](./.agents/skills/caveman/SKILL.md) |
 | **ponytail** | Tryb "leniwego seniora" — YAGNI, minimalny kod, reużywanie zamiast pisania od nowa | [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md) |
 | **diff-review** | Porównanie niezacommitowanych zmian z `HEAD` oraz ocena błędów, ryzyk i przypadków brzegowych | [`.agents/skills/diff-review/SKILL.md`](./.agents/skills/diff-review/SKILL.md) |
+| **conventionals** | Przygotowanie wiadomości według Conventional Commits bez wykonywania commita | [`.agents/skills/conventionals/SKILL.md`](./.agents/skills/conventionals/SKILL.md) |
 
 Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md).
 
@@ -37,6 +38,14 @@ Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md).
 Wpisz w rozmowie z agentem **„diff”** lub **„zrób diff”**. Reguła w [`AGENTS.md`](./AGENTS.md) kieruje agenta do skilla `diff-review`.
 
 Przegląd porównuje bieżące pliki z ostatnim commitem bieżącej gałęzi (`HEAD`), uwzględniając zmiany staged, unstaged oraz nowe nieśledzone pliki. Raport opisuje dodane, zmienione i usunięte elementy, wskazuje konkretne problemy i przypadki brzegowe oraz proponuje poprawki. Sam przegląd nie modyfikuje plików ani historii Git.
+
+Po skopiowaniu skilla do innego projektu dodaj do jego `AGENTS.md` regułę uruchamiania z sekcji „Polecenia własne” tego repozytorium.
+
+### Użycie `conventionals`
+
+Wpisz **„conventionals”** lub **„napisz treść commita według Conventional Commits”**. Agent przygotuje gotową do skopiowania wiadomość w formacie `type(scope): description`, z opcjonalną treścią i stopkami.
+
+Jeśli nie wskażesz zakresu, wiadomość opisze zmiany staged; gdy ich nie ma, obejmie zmiany robocze i nowe nieśledzone pliki. Skill dobiera typ i zakres do zmian, uwzględnia konwencje projektu oraz oznacza zmiany łamiące kompatybilność. Nie wykonuje stagingu, commita ani pushowania.
 
 Po skopiowaniu skilla do innego projektu dodaj do jego `AGENTS.md` regułę uruchamiania z sekcji „Polecenia własne” tego repozytorium.
 
