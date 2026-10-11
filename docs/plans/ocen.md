@@ -1,6 +1,6 @@
 # Plan implementacji skilla `ocen`
 
-Status: propozycja do przeglądu i bieżących zmian. Skill nie jest jeszcze zaimplementowany.
+Status: zaimplementowany w `.agents/skills/ocen/SKILL.md`. Scenariusze akceptacyjne wymagają jeszcze sprawdzenia w praktyce.
 
 ## Cel
 
@@ -20,7 +20,7 @@ Pierwotny opis obejmuje wyzwalacz „oceń”, wybór przedmiotu z kontekstu,
 ocenę kierunku zmian, podatności i nieobsłużonych przypadków brzegowych,
 wykorzystanie `diff-review` oraz inspiracje z internetu.
 
-Po przeglądzie plan doprecyzowuje ocenę commitów przy czystym Git,
+Po przeglądzie plan doprecyzowuje ocenę commitów gałęzi,
 podział odpowiedzialności między skillami, dostępność w Claude Code
 oraz zasady uruchamiania testów i linterów.
 
@@ -31,16 +31,16 @@ identyfikatory pozwalają wskazać, które zachować, zmienić lub usunąć.
 ## Wybór przedmiotu oceny
 
 Stosować poniższą kolejność: jednoznacznie wskazany przedmiot lub zakres,
-lokalne zmiany, zmiany na gałęzi względem bazy, a następnie plan lub
-rozwiązanie z kontekstu. Dostępny plan może być punktem odniesienia
+zmiany w kodzie (commity gałęzi względem bazy razem z lokalnymi
+zmianami), a następnie plan lub rozwiązanie z kontekstu. Dostępny plan może być punktem odniesienia
 dla zmian, niezależnie od tego, jak wybrano zakres.
 
 | Sytuacja | Działanie |
 | --- | --- |
 | Użytkownik wskazuje przedmiot, np. „oceń plan” | Ocenia wskazany przedmiot; pozostały kontekst służy jako pomoc. |
 | Kontekst jednoznacznie wskazuje branch, commit lub PR | Ocenia wskazany zakres, podając bazę porównania. |
-| Samo „oceń”, są lokalne zmiany | Ocenia staged, unstaged i nowe nieśledzone pliki. Cel ustala z rozmowy i dokumentacji. |
-| Samo „oceń”, czysty Git, gałąź ma własne commity względem main | Ocenia `main...HEAD`, czyli zmiany od wspólnego przodka main i HEAD, oraz podaje bazę porównania. |
+| Samo „oceń”, są lokalne zmiany, gałąź nie ma własnych commitów względem main | Ocenia staged, unstaged i nowe nieśledzone pliki względem HEAD. Cel ustala z rozmowy i dokumentacji. |
+| Samo „oceń”, gałąź ma własne commity względem main | Ocenia całość pracy: zmiany od wspólnego przodka main i HEAD wraz z lokalnymi zmianami i nowymi plikami. Podaje bazę porównania i oddziela część niezacommitowaną od zacommitowanej. |
 | Są zmiany oraz odpowiadający im plan | Ocenia zmiany i ich zgodność z planem; wskazuje również problemy samego planu. |
 | Brak lokalnych zmian i zmian gałęzi, dostępny plan lub ostatnio omawiane rozwiązanie | Ocenia ten plan albo rozwiązanie. |
 | Brak jednoznacznego przedmiotu | Zadaje jedno krótkie pytanie zamiast wybierać przypadkowy zakres. |
@@ -131,8 +131,10 @@ przejęty, ponieważ ograniczałby ocenę przypadków brzegowych.
   nieczytelne lub niedostępne do analizy.
 - [ ] Dla zakresu wskazanego przez użytkownika ustalić i podać właściwą
   bazę porównania.
-- [ ] Przy czystym Git uwzględnić commity gałęzi względem `main`
-  i porównanie od wspólnego przodka; obsłużyć brak dostępnej bazy.
+- [ ] Gdy gałąź ma własne commity względem `main`, porównać stan roboczy
+  ze wspólnym przodkiem (`git diff <merge-base>`), dołączyć nowe
+  nieśledzone pliki i oznaczyć zmiany niezacommitowane
+  (`git diff HEAD`); obsłużyć brak dostępnej bazy.
 - [ ] Czytać istotny kontekst i miejsca wywołania zmienionego kodu.
 
 ### 4. Ocena kierunku i poprawności
@@ -193,8 +195,8 @@ przejęty, ponieważ ograniczałby ocenę przypadków brzegowych.
   instrukcji bez pozostałości szablonu oraz poprawność lokalnych linków.
   Zaznaczyć, że to kontrola podstawowa, a nie uruchomienie walidatora YAML.
 - [ ] Sprawdzić zachowanie na scenariuszach z następnej sekcji.
-- [ ] Sprawdzić, czy przegląd pozostawia pliki projektu, indeks
-  i historię Git bez zmian.
+- [ ] Sprawdzić, czy przegląd bez uruchamiania sprawdzeń pozostawia
+  pliki projektu, indeks i historię Git bez zmian.
 - [ ] Sprawdzić dostępność `.claude/skills/ocen/SKILL.md` przez link.
 
 ## Uruchamianie testów i linterów podczas oceny
@@ -203,12 +205,15 @@ Domyślnie `ocen` wykonuje analizę przez odczyt. Nie uruchamia testów,
 linterów ani buildów; wskazuje potrzebne sprawdzenia i proponuje
 odpowiednie polecenia, wyraźnie oznaczając je jako niewykonane.
 
-Na wyraźne polecenie użytkownika uruchamia adekwatne sprawdzenia.
-Jeśli mogą tworzyć artefakty, wykonuje je w izolowanej kopii aktualnego
-stanu projektu, która uwzględnia również oceniane lokalne zmiany,
-zamiast w ocenianym katalogu roboczym. Nie używa trybów automatycznego
-naprawiania lintera. Raport podaje polecenia, środowisko, wyniki oraz
-ograniczenia wynikające z izolacji lub niedostępnych zależności.
+Na wyraźne polecenie użytkownika uruchamia adekwatne sprawdzenia
+w bieżącym katalogu roboczym. Przed uruchomieniem i po nim zapisuje
+`git status --porcelain --ignored`, a w raporcie wymienia pliki
+utworzone lub zmienione przez sprawdzenia. Nie usuwa ich automatycznie;
+proponuje sposób posprzątania. Nie używa trybów automatycznego
+naprawiania lintera ani formatowania w trybie zapisu. Raport podaje
+polecenia, wyniki oraz ograniczenia, w tym to, że kolejna modyfikacja
+pliku zmienionego już przed uruchomieniem nie jest widoczna w statusie
+Git.
 
 Ta zasada dotyczy działania skilla `ocen`. Walidacja jego definicji
 w trakcie implementacji pozostaje częścią etapu 7.
@@ -236,6 +241,7 @@ repo nie tworzy automatycznie punktu dostępu w projekcie nadrzędnym.
 | „Oceń”, zmiany staged i unstaged oraz nowe pliki | Wszystkie lokalne zmiany wchodzą do zakresu. |
 | „Oceń”, wyłącznie nowe nieśledzone pliki | Nowe pliki zostają ocenione mimo pustego diffu śledzonych plików. |
 | „Oceń”, czysty Git, gałąź ma zmiany względem main | Oceniony zostaje `main...HEAD`; raport podaje bazę i wspólnego przodka. |
+| „Oceń”, gałąź ma commity względem main oraz lokalne zmiany | Zakres obejmuje zmiany od wspólnego przodka razem z lokalnymi zmianami i nowymi plikami; raport oddziela część niezacommitowaną. |
 | „Oceń”, czysty Git, brak zmian gałęzi i plan w rozmowie | Oceniony zostaje plan z rozmowy. |
 | „Oceń plan”, nowa sesja, jeden pasujący plan w docs/plans lub dodany w ostatnim commicie | Agent odnajduje i ocenia plan bez wymagania wcześniejszej rozmowy. |
 | „Oceń plan”, kilka równorzędnych planów | Agent zadaje jedno pytanie o wybór planu. |
@@ -248,7 +254,7 @@ repo nie tworzy automatycznie punktu dostępu w projekcie nadrzędnym.
 | Potencjalna podatność bez wystarczającego dowodu | Raport oznacza hipotezę i brakujące dane, zamiast przedstawiać ją jako potwierdzony błąd. |
 | Ograniczony przegląd albo brak uruchomionych testów | Raport ujawnia ograniczenia i wykonane sprawdzenia. |
 | „Oceń” bez prośby o testy lub linter | Sprawdzenia nie są uruchamiane; raport proponuje potrzebne polecenia. |
-| „Oceń i uruchom testy”, testy tworzą artefakty | Testy działają w izolowanej kopii ocenianego stanu; projekt roboczy, indeks i historia pozostają bez zmian. |
+| „Oceń i uruchom testy”, testy tworzą artefakty | Testy działają w katalogu roboczym; raport wymienia utworzone lub zmienione pliki, nie usuwa ich, a indeks i historia pozostają bez zmian. |
 | Duży diff z lockfile i plikami generowanymi | Kod i konfiguracja są analizowane według ryzyka; zależności i źródła w lockfile podlegają kontroli, a ograniczenia analizy plików generowanych są ujawnione. |
 | Nowy sekret lub zmiana uprawnień w CI | Raport wskazuje konkretne ryzyko; nie powiela wartości sekretu. |
 | Instalacja projektowa w Claude Code | Punkt dostępu .claude/skills/ocen/SKILL.md prowadzi do kanonicznej definicji. |

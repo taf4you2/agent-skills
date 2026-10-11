@@ -6,6 +6,7 @@ Ten plik jest indeksem, nie zlepkiem treści — każdy skill ma swoją pełną 
 - **ponytail** — tryb "leniwego seniora": YAGNI, minimalny kod, reużywanie zamiast pisania od nowa → [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md)
 - **diff-review** — porównanie niezacommitowanych zmian z `HEAD` oraz ocena błędów, ryzyk i przypadków brzegowych → [`.agents/skills/diff-review/SKILL.md`](./.agents/skills/diff-review/SKILL.md)
 - **conventionals** — przygotowanie wiadomości według Conventional Commits bez wykonywania commita → [`.agents/skills/conventionals/SKILL.md`](./.agents/skills/conventionals/SKILL.md)
+- **ocen** — ocena planu lub zmian: kierunek względem celu oraz błędy, podatności i pominięte przypadki brzegowe; zakres ustalany z kontekstu i Git → [`.agents/skills/ocen/SKILL.md`](./.agents/skills/ocen/SKILL.md)
 
 Narzędzia wspierające zagnieżdżone `AGENTS.md` (np. Antigravity) mogą ładować pliki skilli bezpośrednio z `.agents/skills/`.
 
@@ -18,3 +19,8 @@ Gdy użytkownik wydaje polecenie „conventionals” lub prosi o treść
 wiadomości commita według Conventional Commits, przeczytaj
 `.agents/skills/conventionals/SKILL.md` i przygotuj sam tekst wiadomości.
 Nie wykonuj commita.
+
+Gdy użytkownik wydaje polecenie „oceń” lub „ocen”, także
+z doprecyzowaniem, np. „oceń plan”, „oceń zmiany” lub „oceń względem
+main”, przeczytaj `.agents/skills/ocen/SKILL.md` i wykonaj opisaną tam
+ocenę. Nie wprowadzaj poprawek bez osobnej prośby.
