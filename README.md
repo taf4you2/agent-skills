@@ -35,6 +35,27 @@ Poniższe skille są gotowe do użycia. `caveman` i `ponytail` są aktualizowane
 
 Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md).
 
+### Skille z pstack
+
+Wybrane skille z [pstack](https://github.com/cursor/plugins/tree/main/pstack) (Lauren Tan, MIT), skopiowane bez zmian z `cursor/plugins` @ `e5136d8` i aktualizowane ręcznie. Wybrano tylko te, które nie zależą od Cursora (subagentów z mapowaniem modeli, `~/.cursor/rules`, pluginu `cursor-team-kit`). Licencja jest w [`THIRD_PARTY_LICENSES.md`](./THIRD_PARTY_LICENSES.md) — przy kopiowaniu skilli do innego projektu dołącz jej treść. `.claude/skills/<nazwa>` to link do `.agents/skills/<nazwa>`.
+
+| Skill | Opis |
+|-------|------|
+| **tdd** | Najpierw test, który pada, potem poprawka — tylko przy tanim, lokalnym teście |
+| **blast-radius** | Co zmiana może zepsuć poza diffem, z dowodem z uruchomionego kodu |
+| **technical-writing** | Standard pisania dokumentacji, RFC, README, opisów PR i commitów (Diátaxis, styl Google) |
+| **unslop** | Usuwanie śladów tekstu pisanego przez AI |
+| **in-your-own-words** | Agent opisuje własnymi słowami cel i problem przed startem |
+| **sharpen** | Doprecyzowanie zadania: podejście eksperta i to, o co naprawdę chodzi |
+| **benchmark-checklist** | Weryfikacja pomiaru wydajności przed raportem |
+| **correct** | Zamiana powtarzanych błędów agentów w architekturę, typy, lint lub testy |
+| **typescript-best-practices** | Dobre praktyki przy plikach `.ts`/`.tsx` |
+| **principle-\*** | Zasady inżynierskie: `test-behavior-not-implementation`, `foundational-thinking`, `model-the-domain`, `type-system-discipline`, `boundary-discipline`, `explain-the-number`, `encode-lessons-in-structure`, `migrate-callers-then-delete-legacy-apis`, `sequence-verifiable-units`, `make-operations-idempotent` |
+
+Wszystkie mają w nagłówku `disable-model-invocation: true`, więc w Claude Code agent nie uruchomi ich sam — wywołujesz je ręcznie, np. `/tdd`, `/blast-radius`, `/principle-model-the-domain`. W pstack zasady `principle-*` ładuje automatycznie `poteto-mode`, którego tu nie ma.
+
+Skille odwołują się do siebie nawzajem (np. `technical-writing` → `unslop`, `typescript-best-practices` → `principle-type-system-discipline`), więc kopiuj je razem. Dwa odwołania prowadzą do skilli, których tu nie ma: `principle-prove-it-works` (jego rolę pełni `verification-before-completion`) i `principle-build-the-lever`.
+
 ### Użycie `grug`
 
 Wpisz **„/grug”**, **„/grugmode”** lub **„grug mode”**, np. `/grug czy ten projekt potrzebuje mikroserwisów?`. Agent udziela praktycznych porad programistycznych w charakterystycznym, prostym angielskim stylu gruga, z naciskiem na ograniczanie złożoności.
