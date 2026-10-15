@@ -4,6 +4,7 @@ Ten plik jest indeksem, nie zlepkiem treści — każdy skill ma swoją pełną 
 
 - **caveman** — ultra-skompresowana komunikacja, mniej tokenów przy tej samej precyzji technicznej → [`.agents/skills/caveman/SKILL.md`](./.agents/skills/caveman/SKILL.md)
 - **ponytail** — tryb "leniwego seniora": YAGNI, minimalny kod, reużywanie zamiast pisania od nowa → [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md)
+- **grug** — praktyczne porady programistyczne w stylu Grug Brained Developer: prostota i ograniczanie złożoności → [`.agents/skills/grug/SKILL.md`](./.agents/skills/grug/SKILL.md)
 - **diff-review** — porównanie niezacommitowanych zmian z `HEAD` oraz ocena błędów, ryzyk i przypadków brzegowych → [`.agents/skills/diff-review/SKILL.md`](./.agents/skills/diff-review/SKILL.md)
 - **conventionals** — przygotowanie wiadomości według Conventional Commits bez wykonywania commita → [`.agents/skills/conventionals/SKILL.md`](./.agents/skills/conventionals/SKILL.md)
 - **ocen** — ocena planu lub zmian: kierunek względem celu oraz błędy, podatności i pominięte przypadki brzegowe; zakres ustalany z kontekstu i Git → [`.agents/skills/ocen/SKILL.md`](./.agents/skills/ocen/SKILL.md)
@@ -11,6 +12,10 @@ Ten plik jest indeksem, nie zlepkiem treści — każdy skill ma swoją pełną 
 Narzędzia wspierające zagnieżdżone `AGENTS.md` (np. Antigravity) mogą ładować pliki skilli bezpośrednio z `.agents/skills/`.
 
 ## Polecenia własne
+
+Gdy użytkownik wydaje polecenie „/grug”, „/grugmode” lub „grug mode”,
+przeczytaj `.agents/skills/grug/SKILL.md` i zastosuj opisany tam tryb.
+Tryb trwa do wyraźnego zakończenia, np. „stop grug” lub „normal mode”.
 
 Gdy użytkownik wydaje polecenie „diff” lub „zrób diff”, przeczytaj
 `.agents/skills/diff-review/SKILL.md` i wykonaj opisany tam przegląd.

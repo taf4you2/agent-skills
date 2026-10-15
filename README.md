@@ -22,17 +22,26 @@ To repozytorium zbiera i porządkuje skille stworzone przez społeczność (Matt
 
 ## Dostępne skille w tym repo
 
-Poniższe skille są gotowe do użycia. `caveman` i `ponytail` są aktualizowane automatycznie co tydzień; `diff-review`, `conventionals` i `ocen` są utrzymywane lokalnie w tym repozytorium.
+Poniższe skille są gotowe do użycia. `caveman` i `ponytail` są aktualizowane automatycznie co tydzień; `grug` jest kopią z [replete/grug](https://github.com/replete/grug), aktualizowaną ręcznie; `diff-review`, `conventionals` i `ocen` są utrzymywane lokalnie w tym repozytorium.
 
 | Skill | Opis | Ścieżka (wspólna) |
 |-------|------|---------|
 | **caveman** | Tryb ultra-skompresowanej komunikacji — mniej tokenów, ta sama precyzja techniczna | [`.agents/skills/caveman/SKILL.md`](./.agents/skills/caveman/SKILL.md) |
 | **ponytail** | Tryb "leniwego seniora" — YAGNI, minimalny kod, reużywanie zamiast pisania od nowa | [`.agents/skills/ponytail/SKILL.md`](./.agents/skills/ponytail/SKILL.md) |
+| **grug** | Praktyczne porady programistyczne w stylu Grug Brained Developer — prostota i ograniczanie złożoności | [`.agents/skills/grug/SKILL.md`](./.agents/skills/grug/SKILL.md) |
 | **diff-review** | Porównanie niezacommitowanych zmian z `HEAD` oraz ocena błędów, ryzyk i przypadków brzegowych | [`.agents/skills/diff-review/SKILL.md`](./.agents/skills/diff-review/SKILL.md) |
 | **conventionals** | Przygotowanie wiadomości według Conventional Commits bez wykonywania commita | [`.agents/skills/conventionals/SKILL.md`](./.agents/skills/conventionals/SKILL.md) |
 | **ocen** | Ocena planu lub zmian: kierunek względem celu oraz błędy, podatności i pominięte przypadki brzegowe | [`.agents/skills/ocen/SKILL.md`](./.agents/skills/ocen/SKILL.md) |
 
 Pełny indeks z opisami: [`AGENTS.md`](./AGENTS.md).
+
+### Użycie `grug`
+
+Wpisz **„/grug”**, **„/grugmode”** lub **„grug mode”**, np. `/grug czy ten projekt potrzebuje mikroserwisów?`. Agent udziela praktycznych porad programistycznych w charakterystycznym, prostym angielskim stylu gruga, z naciskiem na ograniczanie złożoności.
+
+Tryb pozostaje aktywny w kolejnych odpowiedziach aż do polecenia **„stop grug”** lub **„normal mode”**. W tym repo `.claude/skills/grug` jest linkiem do `.agents/skills/grug`, więc Claude Code korzysta z tego samego pliku co Codex. Po skopiowaniu skilla do innego projektu dodaj do jego `AGENTS.md` regułę uruchamiania z sekcji „Polecenia własne” tego repozytorium.
+
+Źródło: [replete/grug](https://github.com/replete/grug). Oryginalny `SKILL.md` zachowano bez zmian; licencja MIT znajduje się w [`.agents/skills/grug/LICENSE`](./.agents/skills/grug/LICENSE).
 
 ### Użycie `diff-review`
 
