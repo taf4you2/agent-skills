@@ -16,6 +16,7 @@ To repozytorium zbiera i porządkuje skille stworzone przez społeczność (Matt
 |-----------|--------------------|
 | **Claude Code** | `.claude/skills/<nazwa>/SKILL.md` (projekt) lub `~/.claude/skills/<nazwa>/SKILL.md` (globalnie) — **nie** `.agents/skills/`, patrz sekcja niżej |
 | **Codex** | `.agents/skills/<nazwa>/SKILL.md` |
+| **Gemini CLI** | `.agents/skills/<nazwa>/SKILL.md` lub `.gemini/skills/<nazwa>/SKILL.md` |
 | **Antigravity** | `AGENTS.md` w rootcie (index) i zagnieżdżone `AGENTS.md`/`SKILL.md` w `.agents/skills/` |
 
 > **Uwaga (Claude Code):** to repo trzyma pliki skilli pod `.agents/skills/` (dla Codex/Antigravity) oraz pod legacy ścieżkami `.caveman/`, `.ponytail/`. Claude Code nie skanuje żadnej z tych lokalizacji automatycznie — żeby skill był widoczny, jego `SKILL.md` musi fizycznie leżeć (lub być zlinkowany) pod `.claude/skills/<nazwa>/SKILL.md`. Zobacz [„Submodule + Claude Code”](#submodule--claude-code) niżej.
@@ -144,6 +145,42 @@ cd mój-projekt
 mkdir -p .agents/skills/caveman
 curl -fsSL https://raw.githubusercontent.com/taf4you2/agent-skills/main/.agents/skills/caveman/SKILL.md \
   -o .agents/skills/caveman/SKILL.md
+```
+
+### Opcja D: Sklonować do projektu i uruchomić skrypt konfiguracji
+
+Konfiguruje wszystkie skille naraz dla Claude Code, Codex i Gemini CLI.
+
+Linux i WSL:
+
+```bash
+cd mój-projekt
+git clone https://github.com/taf4you2/agent-skills
+agent-skills/setup.sh
+```
+
+Windows (PowerShell, bez uprawnień administratora):
+
+```powershell
+cd mój-projekt
+git clone https://github.com/taf4you2/agent-skills
+powershell -ExecutionPolicy Bypass -File agent-skills\setup.ps1
+```
+
+Skrypt:
+
+- tworzy linki `.agents/skills/<nazwa>` (Codex, Gemini CLI) i `.claude/skills/<nazwa>` (Claude Code); na Windowsie są to junctiony
+- dodaje polecenia własne do bloku oznaczonego znacznikami w `AGENTS.md`
+- dopisuje import `AGENTS.md` do `CLAUDE.md` i `GEMINI.md`
+- dodaje do `.git/info/exclude` klon, linki i utworzone przez siebie pliki
+
+Istniejących skilli o tej samej nazwie nie nadpisuje, tylko wypisuje ostrzeżenie. Zmiany w już istniejących `AGENTS.md`, `CLAUDE.md` i `GEMINI.md` będą widoczne w `git status` projektu.
+
+Aby zaktualizować skille, uruchom z katalogu projektu:
+
+```bash
+git -C agent-skills pull
+agent-skills/setup.sh   # na Windowsie: powershell -ExecutionPolicy Bypass -File agent-skills\setup.ps1
 ```
 
 ## Rekomendowany zestaw globalny
