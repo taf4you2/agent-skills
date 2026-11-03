@@ -57,6 +57,25 @@ Wszystkie mają w nagłówku `disable-model-invocation: true`, więc w Claude Co
 
 Skille odwołują się do siebie nawzajem (np. `technical-writing` → `unslop`, `typescript-best-practices` → `principle-type-system-discipline`), więc kopiuj je razem. Dwa odwołania prowadzą do skilli, których tu nie ma: `principle-prove-it-works` (jego rolę pełni `verification-before-completion`) i `principle-build-the-lever`.
 
+### Skille frontendowe i UX
+
+Skille skopiowano ze wskazanych niżej wersji źródłowych. Aktualizacje są ręczne. Zachowano oryginalne instrukcje, materiały pomocnicze i dostępne pliki licencji.
+
+| Skill | Zastosowanie | Wydawca i źródło |
+|-------|--------------|-----------------|
+| [frontend-design](./.agents/skills/frontend-design/SKILL.md) | Kierunek wizualny, typografia i układ interfejsu | [Anthropic, `ca45fc4`](https://github.com/anthropics/skills/tree/ca45fc496a3436251f191354091d557da31c15b5/skills/frontend-design) |
+| [baseline-ui](./.agents/skills/baseline-ui/SKILL.md) | Poprawa odstępów, hierarchii, typografii i interakcji | [ibelick (Julien Thibeaut), `73fb128`](https://github.com/ibelick/ui-skills/tree/73fb128d046d1f0d74c2909cd26eb616e3415567/skills/baseline-ui) |
+| [web-design-guidelines](./.agents/skills/web-design-guidelines/SKILL.md) | Przegląd UI według Web Interface Guidelines | [Vercel Labs, `1a2c79d`](https://github.com/vercel-labs/agent-skills/tree/1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62/skills/web-design-guidelines) |
+| [make-interfaces-feel-better](./.agents/skills/make-interfaces-feel-better/SKILL.md) | Dopracowanie typografii, ikon, animacji, cieni i obszarów interaktywnych | [Jakub Krehel, `35545ea`](https://github.com/jakubkrehel/make-interfaces-feel-better/tree/35545ea1512ad59fa463e6b1f95ca9c052981fe6/skills/make-interfaces-feel-better) |
+| [ux-heuristics-audit](./.agents/skills/ux-heuristics-audit/SKILL.md) | Audyt według heurystyk Nielsena z wagą problemów i propozycjami poprawek | [Uxcel Lab, `5007cd0`](https://github.com/Uxcel-Lab/product-skills/tree/5007cd0241ccaa51ae2e4681f9618912dc10e239/ux/audits/heuristics) |
+| [webapp-testing](./.agents/skills/webapp-testing/SKILL.md) | Testy lokalnych aplikacji przez Python i Playwright | [Anthropic, `ca45fc4`](https://github.com/anthropics/skills/tree/ca45fc496a3436251f191354091d557da31c15b5/skills/webapp-testing) |
+
+Katalogi `.claude/skills/` zawierają pełne kopie tych sześciu skilli, żeby działały także na Windowsie bez uprawnień do tworzenia dowiązań symbolicznych. Po aktualizacji skilla w `.agents/skills/` zaktualizuj również jego kopię w `.claude/skills/`. Przy kopiowaniu do innego projektu przenieś cały katalog skilla wraz z licencją oraz odpowiedni wpis z [`THIRD_PARTY_LICENSES.md`](./THIRD_PARTY_LICENSES.md).
+
+`web-design-guidelines` pobiera aktualne reguły podczas każdego przeglądu i wymaga dostępu do sieci. `webapp-testing` wymaga Pythona, pakietu Playwright i zainstalowanej przeglądarki Chromium; katalog zawiera skrypt `scripts/with_server.py` oraz przykłady użycia.
+
+`ux-heuristics-audit` zachowuje odwołania źródłowe do `ux-design-review`, `accessibility-audit` i `docs/orchestration-policy.md`. Nie są częścią tego importu; sam audyt heurystyk można wywołać niezależnie.
+
 ### Użycie `grug`
 
 Wpisz **„/grug”**, **„/grugmode”** lub **„grug mode”**, np. `/grug czy ten projekt potrzebuje mikroserwisów?`. Agent udziela praktycznych porad programistycznych w charakterystycznym, prostym angielskim stylu gruga, z naciskiem na ograniczanie złożoności.

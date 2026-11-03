@@ -31,6 +31,15 @@ Ten plik jest indeksem, nie zlepkiem treści — każdy skill ma swoją pełną 
 - **principle-sequence-verifiable-units** — praca w małych krokach, z których każdy kończy się sprawdzalnym stanem → [`.agents/skills/principle-sequence-verifiable-units/SKILL.md`](./.agents/skills/principle-sequence-verifiable-units/SKILL.md)
 - **principle-make-operations-idempotent** — operacje dają ten sam stan końcowy mimo awarii i ponownych uruchomień → [`.agents/skills/principle-make-operations-idempotent/SKILL.md`](./.agents/skills/principle-make-operations-idempotent/SKILL.md)
 
+### Frontend i UX
+
+- **frontend-design** — projektowanie interfejsów z wyraźnym kierunkiem wizualnym, typografią i układem dopasowanym do produktu → [`.agents/skills/frontend-design/SKILL.md`](./.agents/skills/frontend-design/SKILL.md)
+- **baseline-ui** — przegląd i poprawa odstępów, hierarchii, typografii oraz interakcji w UI → [`.agents/skills/baseline-ui/SKILL.md`](./.agents/skills/baseline-ui/SKILL.md)
+- **web-design-guidelines** — przegląd kodu UI według aktualnych Web Interface Guidelines Vercela → [`.agents/skills/web-design-guidelines/SKILL.md`](./.agents/skills/web-design-guidelines/SKILL.md)
+- **make-interfaces-feel-better** — dopracowanie typografii, ikon, animacji, cieni i obszarów interaktywnych → [`.agents/skills/make-interfaces-feel-better/SKILL.md`](./.agents/skills/make-interfaces-feel-better/SKILL.md)
+- **ux-heuristics-audit** — audyt użyteczności według dziesięciu heurystyk Nielsena, z wagą problemów i konkretnymi poprawkami → [`.agents/skills/ux-heuristics-audit/SKILL.md`](./.agents/skills/ux-heuristics-audit/SKILL.md)
+- **webapp-testing** — testowanie lokalnych aplikacji przez Python i Playwright, z obsługą serwerów, zrzutów ekranu i logów → [`.agents/skills/webapp-testing/SKILL.md`](./.agents/skills/webapp-testing/SKILL.md)
+
 Narzędzia wspierające zagnieżdżone `AGENTS.md` (np. Antigravity) mogą ładować pliki skilli bezpośrednio z `.agents/skills/`.
 
 ## Polecenia własne
